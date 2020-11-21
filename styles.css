@@ -1,0 +1,43 @@
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup_chat */
+
+/*body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}*/
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+  white-space: normal;
+}
+
+.close-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+  background-color: red;
+}
+
+.info-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  /*  */
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}

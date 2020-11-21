@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Chewy</title>
+
+    <!------- Loading JS scripts ------->
+    <!-- When loading JS scripts, considerations should be made regarding when
+         the DOM is being loaded, and when different scripts 
+         depend on each other. Below are a few ways to load the scripts.
+     -->
+
+     <!-- Load any CSS before the JS in case you need to access styles in your scripts. -->
+    <link rel="stylesheet" href="styles.css">
+   	<!-- If you don't use either 'async' or 'defer', the HTML parsing/DOM loading is blocked until the script is downloaded and executed. -->
+    <!-- Since it is the top script on the page, it will block 
+      before loading everything under it (including the <body>).  -->
+    <!-- <script src="dom_load.js"></script> -->
+
+    <!-- 'defer' states that the script should be executed after the HTML is parsed.
+         If multiple scripts have 'defer', they are loaded one after the other.  
+         This will guarantee execution order, and ensure that scripts that depend on each other load
+         in an order that will not cause errors. -->
+    <!-- First we load jquery from a Google CDN. -->
+    <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- Then we load a script that depends on jQuery -->
+    <!-- <script defer type="text/javascript" src='js_libraries.js'></script> -->
+    <!-- Then we load a script that depends on our libraries (and jQuery) -->
+    <!-- <script defer type="text/javascript" src='examples.js'></script> -->
+
+    <!-- 
+    - 'async' states that it is safe to download the script without blocking 
+    HTML parsing, and execute  once downloaded (DOM loading, if not completed, pauses during script execution).
+    This allows for quicker loading of the DOM content while waiting for scripts to download.
+    Note that if multiple scripts are 'async', their order
+    of loading is *not* guaratneed, and async scripts may also be executed after 
+    the 'DOMContentLoaded' event is fired (we make up for this in the dom_load_async.js file).
+    * General rule: don't use async on scripts that depend on each other. *
+     Often scripts like ads and analytics are loaded async since they don't depend
+     on other scipts.
+    -->
+    <!-- <script async type="text/javascript" src='dom_load_async.js'></script> -->
+    <script type="text/javascript" src="constants.js"></script>
+    <script defer type="text/javascript" src="chewy.js"></script>
+
+ </head>
+ <body>
+    <div id='myId'>Here's some text</div>
+    <h1>CHEWY.js</h1>
+    <h2>Plug and Play image formatter and viewer</h2>
+    <p>Notice the popup on the bottom right. Click it to expand it for more info!</p>
+
+    <h3>Wow look at this convoluted subpar website. There are tons of images and other piece of information
+        all over the place, making it inconvenient for a user who wants to just view the images present on the
+        page. If only a user could <strong>Press `\` on their keyboard</strong> to make life easier...
+    </h3>
+
+    <!-- <table width="50" border="1" cellpadding="5"> -->
+    <table>
+        <tr>
+            <td align="center" valign="center">
+            <img src="https://i.pinimg.com/originals/63/ac/10/63ac107caeebda2a798c90996564c4cf.png" alt="description here" />
+            <!-- <br /> -->
+            Cool cactus.
+            </td>
+            <td align="center" valign="center">
+            <img src="https://blog-assets.hootsuite.com/wp-content/uploads/2022/03/free-stock-photo-sites-2-620x414.jpg" alt="description here" />
+            <br />
+            Cool guy.
+            </td>
+            <td align="center" valign="center">
+            <br />
+            Cool kid.
+            <img src="https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="center">
+            <img src="https://miro.medium.com/max/2600/1*mtGIfXRPG2FG_zbKJhwWzA.png" alt="description here" width="500" height="600" />
+            <br />
+            Meme.
+            </td>
+            <td align="center" valign="center">
+            <img src="https://nexter.org/wp-content/uploads/2019/07/weird-stock-images-photos-funny-pic38.jpg" alt="description here" />
+            <br />
+            Cool guy.
+            </td>
+            <td align="center" valign="center">
+
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="center">
+            <img src="https://img3.stockfresh.com/files/i/ichiosea/m/45/4056303_stock-photo-grandpa-protecting-his-savings.jpg" alt="description here" />
+            <br />
+            Cool cactus.
+            </td>
+            <td align="center" valign="center">
+
+            </td>
+            <td align="center" valign="center">
+            <br />
+            Cool kid.
+            <img src="https://static.boredpanda.com/blog/wp-content/uploads/2017/12/funny-weird-wtf-stock-photos-4-5a3927b70f562__700.jpg" />
+            </td>
+        </tr>
+    </table>
+
+ </body>
+</html>
