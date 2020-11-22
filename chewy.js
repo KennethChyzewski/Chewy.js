@@ -4,12 +4,13 @@ console.log('chewy.js loaded')
 
 //Globals
 var inViewMode = false;
-var formatsDict = {220: '3 x 3 grid', 221: 'slideshow'};
-var codesDict = {220: '\\', 221: ']'};
+var formatsDict = {220: '3 x 3 grid', 221: 'slideshow', 48: 'column'};
+var codesDict = {220: '\\', 221: ']', 48: '0'};
 var oldBody;
-//web pages 1024 pixels wide by 768 pixels high.
-const pageHeight = window.screen.availHeight;
-const pageWidth = window.screen.availWidth;
+//average web pages 1024 pixels wide by 768 pixels high.
+const pageHeight = window.screen.availHeight; //900
+const pageWidth = window.screen.availWidth; //1440
+
 
 document.addEventListener("keydown", keyDown, false);
 
@@ -90,15 +91,15 @@ function keyDown(e) {
 }
 
 function buildFormat(format, images) {
-	//web pages 1024 pixels wide by 768 pixels high.
 	const newBody = document.createElement('body')
-	const table = document.createElement('table')
-	// table.classList.add('someTable') //css styling class
+	// const table = document.createElement('table')
 	if (format == '3 x 3 grid') {
+		const table = document.createElement('table')
 		let tableRow = document.createElement('tr')
 		for (let i = 0; i < images.length; i++) {
 			let tableCell = document.createElement('td')
-			let img = new Image(pageHeight/3,pageWidth/3);
+			tableCell.classList.add('newImages');
+			let img = new Image(pageWidth/3,pageHeight/3);
 	        img.src = images[i].src;
 	        tableCell.appendChild(img)
 	        tableRow.appendChild(tableCell)
@@ -113,36 +114,35 @@ function buildFormat(format, images) {
 		if (images.length % 3 != 0) {
 			table.appendChild(tableRow)
 		}
-
-		// let tableRow = document.createElement('tr')
-		// let tableCell = document.createElement('td')
-		// // let img = document.createElement('img')
-		// let img = new Image(341,256);
-  //       img.src = images[0].src;
-  //       // img.class="responsive";
-  //       tableCell.appendChild(img)
-  //       tableRow.appendChild(tableCell)
-  //       table.appendChild(tableRow)
-
-  //       tableCell = document.createElement('td')
-		// img = new Image(341,256);
-  //       img.src = images[1].src;
-  //       tableCell.appendChild(img)
-  //       tableRow.appendChild(tableCell)
-  //       table.appendChild(tableRow)
-
-  //       tableCell = document.createElement('td')
-		// img = new Image(341,256);
-  //       img.src = images[2].src;
-  //       tableCell.appendChild(img)
-  //       tableRow.appendChild(tableCell)
-  //       table.appendChild(tableRow)
+		newBody.appendChild(table)
 	}
 	if (format == 'slideshow') {
-		console.log('slideshow not implemented!!')
+		const slideshowDiv = document.createElement('div');
+		slideshowDiv.classList.add('fadein');
+		for (let i = 0; i < images.length; i++) {
+			let img = new Image(pageWidth,pageHeight);
+	        img.src = images[i].src;
+	        img.setAttribute("style","display: none;");
+	        // img.classList.add('yeet');
+	        slideshowDiv.appendChild(img)
+		}
+		newBody.appendChild(slideshowDiv)
+	}
+	if (format == 'column') {
+		const table = document.createElement('table')
+		for (let i = 0; i < images.length; i++) {
+			let tableRow = document.createElement('tr')
+			let tableCell = document.createElement('td')
+			let img = new Image(pageWidth,pageHeight);
+	        img.src = images[i].src;
+	        tableCell.appendChild(img)
+	        tableRow.appendChild(tableCell)
+	        table.appendChild(tableRow)
+		}
+		newBody.appendChild(table)
 	}
 	// document.body.appendChild(table)
-	newBody.appendChild(table)
+	// newBody.appendChild(table)
 	document.body = newBody //Should be done in keyDown
 }
 
@@ -167,23 +167,12 @@ function convertKeyToKeyCode(key) {
 	return charToCode[key]; //constants.js
 }
 
+//Slideshow
+$(() => {
+    // $('.fadein img:gt(0)').hide();
+    setInterval(() => {
+    	$('.fadein :first-child').fadeOut().next('img').fadeIn().end().appendTo('.fadein');},
+    	3000);
+    $('.fadein img:gt(0)').hide();
+});
 
-
-// Some normal jQuery:
-// const e = $('#myId')
-// log(e.text())
-
-// // Our jQuery clone:
-// const e2 = $$$('#myId')
-// log(e2.text())
-// e2.addClass('myClass')
-// e2.attr('myAttr', 'test')
-// log(e2.attr('myAttr'))
-
-// // Circle Generator
-// const cg = new CircleGenerator()
-// cg.makeCircle()
-// cg.makeCircle()
-// cg.changeCirclesColor()
-// const cg2 = new CircleGenerator() // will have its own circles seperate from cg, but the same prototype reference
-// cg2.makeCircle()

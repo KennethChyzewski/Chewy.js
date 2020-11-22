@@ -41,3 +41,24 @@
   padding: 10px;
   background-color: white;
 }
+
+
+.newImages {
+  font-size: 0;
+  padding: 0px 0px 0px 0px; 
+  margin: 0;
+}
+
+.fadein { 
+  position: relative; 
+  height: 400px; 
+  width: auto; 
+}
+
+.fadein img {
+  position: absolute;
+  left: 0px;
+  top: -20px;
+  height: 350px;
+  width: relative;
+}
