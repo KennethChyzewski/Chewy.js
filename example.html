@@ -43,21 +43,21 @@
     -->
     <!-- Jquery used for slideshow of images-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <!-- <script async type="text/javascript" src='dom_load_async.js'></script> -->
     <script type="text/javascript" src="constants.js"></script>
     <script defer type="text/javascript" src="chewy.js"></script>
-    <!-- <script defer type="text/javascript" src="examples.js"></script> -->
+    <script defer type="text/javascript" src="examples.js"></script>
 
  </head>
  <body>
     <h1>CHEWY.js</h1>
-    <h2>Plug and Play image formatter and viewer</h2>
+    <h2>Plug and Play image formatter and viewer.</h2>
+    <a href="#test">More info found at the bottom of the page!</a>
     <p>Notice the popup on the bottom right. Click it to expand it for more info!</p>
 
-    <h3>Wow look at this convoluted subpar website. There are tons of images and other piece of information
+    <p>Wow look at this convoluted subpar website. There are tons of images and other piece of information
         all over the place, making it inconvenient for a user who wants to just view the images present on the
-        page. If only a user could <strong>Press `\` on their keyboard</strong> to make life easier...
-    </h3>
+        page. If only a user could <b>Press `G` on their keyboard</b> to make life easier...
+    </p>
 
     <!-- <table width="50" border="1" cellpadding="5"> -->
     <table>
@@ -109,6 +109,29 @@
             </td>
         </tr>
     </table>
+
+    <div id="test">
+        <h3>How to install</h3>
+        <p>Insert the following tags into your root .html file</p>
+        <code>
+            &lt;link rel="stylesheet" href="styles.css"&gt; <br>
+            &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"&gt;&lt;/script&gt; <br>
+            &lt;script type="text/javascript" src="constants.js"&gt;&lt;/script&gt; <br>
+            &lt;script defer type="text/javascript" src="chewy.js"&gt;&lt;/script&gt;
+            <!-- &lt;script defer type="text/javascript" src="examples.js"&gt;&lt;/script&gt; -->
+        </code>
+
+        <h3>How to use</h3>
+        <p>Insert the following Javascript code into your highest level .js file</p>
+        <code>
+            const chewy = Chewy() //Create an instance of Chewy.js <br>
+            chewy.createFormat('K', '69 x 69 grid') // Add a viewing format your users would appreciate <br>
+            chewy.updateFormat('K', '3 x 3 grid') // Modify existing formats based on user feedback <br>
+            chewy.deleteFormat('K') // Remove existing formats
+        </code>
+        <p>You will notice the Chewy.js assistant appear on the bottom right of your web page ----->
+        <br>Yes. It is really that simple.</p>
+    </div>
 
  </body>
 </html>
