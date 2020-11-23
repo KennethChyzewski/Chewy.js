@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '/pub')))
 // Express has something called a Router, which 
 // takes specific HTTP requests and handles them
 // based on the HTTP method and URL
-app.get('*', (req,res)=> {
+app.get('/', (req,res)=> {
 	res.sendFile(path.join(__dirname, 'examples.html'))
 })
 
