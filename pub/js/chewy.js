@@ -43,6 +43,12 @@ function Chewy() {
 
 	document.addEventListener("keydown", keyDown, false);
 
+	// if (x.style.display === "none") {
+	// 	x.style.display = "block";
+	// } else {
+	// 	x.style.display = "none";
+	// }
+
 	// Added defer in the <script> tag of the index.html file but this just incase
 	window.onload = function() {
 		// Add the expandable pop to all web pages using CHEWY.js
@@ -51,6 +57,13 @@ function Chewy() {
 		chewyInfoButton.classList.add('open-button');
 		chewyInfoButton.onclick = () => document.getElementById("popup").style.display = "block";
 		chewyInfoButton.innerHTML = 'This page is CHEWY supported! <br> Click here to view commands';
+		// If there exists any images on the page, make Chewy visible and accessible
+		let allImgs = getImgs();
+		if (allImgs.length === 0) {
+			chewyInfoButton.style.display = "none";
+		} else {
+			chewyInfoButton.style.display = "block";
+		}
 		document.body.appendChild(chewyInfoButton);
 		//------------------------------------
 		let chewyInfo = document.createElement('div');
@@ -114,9 +127,9 @@ function Chewy() {
 				popupHelper(_self.codesDict[keyCode])
 			}
 		}
-		else {
-			console.log('keyCode of press key is ', keyCode)
-		}
+		// else {
+		// 	console.log('keyCode of press key is ', keyCode)
+		// }
 	}
 
 	function buildFormat(format, images) {

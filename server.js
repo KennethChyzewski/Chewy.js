@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '/pub')))
 // takes specific HTTP requests and handles them
 // based on the HTTP method and URL
 app.get('/', (req,res)=> {
-	res.sendFile(path.join(__dirname, '/pub/examples.html'))
+	res.sendFile(path.join(__dirname, '/pub/index.html'))
 })
 
 // Let's make a route for an HTTP GET request to the 

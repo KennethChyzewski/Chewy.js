@@ -2,7 +2,7 @@
 "use strict";
 console.log('examples.js loaded')
 
-const chewy = Chewy()
+const chewy = new Chewy()
 chewy.createFormat('K', '69 x 69 grid')
 chewy.deleteFormat('K')
 chewy.createFormat('L', 'row')

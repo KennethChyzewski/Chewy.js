@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Chewy</title>
+
+    <!------- Loading JS scripts ------->
+    <!-- When loading JS scripts, considerations should be made regarding when
+        the DOM is being loaded, and when different scripts 
+        depend on each other. Below are a few ways to load the scripts.
+    -->
+
+     <!-- Load any CSS before the JS in case you need to access styles in your scripts. -->
+    <link rel="stylesheet" type="text/css" href="css/websitestyles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+   	<!-- If you don't use either 'async' or 'defer', the HTML parsing/DOM loading is blocked until the script is downloaded and executed. -->
+    <!-- Since it is the top script on the page, it will block 
+      before loading everything under it (including the <body>).  -->
+    <!-- <script src="dom_load.js"></script> -->
+
+    <!-- 'defer' states that the script should be executed after the HTML is parsed.
+        If multiple scripts have 'defer', they are loaded one after the other.  
+        This will guarantee execution order, and ensure that scripts that depend on each other load
+        in an order that will not cause errors. -->
+    <!-- First we load jquery from a Google CDN. -->
+    <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- Then we load a script that depends on jQuery -->
+    <!-- <script defer type="text/javascript" src='js_libraries.js'></script> -->
+    <!-- Then we load a script that depends on our libraries (and jQuery) -->
+    <!-- <script defer type="text/javascript" src='examples.js'></script> -->
+
+    <!-- 
+    - 'async' states that it is safe to download the script without blocking 
+    HTML parsing, and execute  once downloaded (DOM loading, if not completed, pauses during script execution).
+    This allows for quicker loading of the DOM content while waiting for scripts to download.
+    Note that if multiple scripts are 'async', their order
+    of loading is *not* guaratneed, and async scripts may also be executed after 
+    the 'DOMContentLoaded' event is fired (we make up for this in the dom_load_async.js file).
+    * General rule: don't use async on scripts that depend on each other. *
+     Often scripts like ads and analytics are loaded async since they don't depend
+     on other scipts.
+    -->
+    <!-- Jquery used for slideshow of images-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script defer type="text/javascript" src="js/chewy.js"></script>
+    <script defer type="text/javascript" src="js/examples.js"></script>
+
+</head>
+<body>
+    <!-- https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black -->
+    <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/examples.html">Examples</a></li>
+        <li><a class="active" href="/documentation.html">Documentation</a></li>
+        <li><a href="https://github.com/csc309-fall-2020/js-library-chyzewsk" target="_blank">Github</a></li>
+    </ul>
+    <div class="content">
+        <div class="title">
+            <h1>CHEWY.js</h1>
+            <h2>Plug and Play image formatter and viewer.</h2>
+        </div>
+
+        <div>
+            <h3>How to install</h3>
+            <p>Insert the following tags into all of your .html files</p>
+            <!-- https://zellwk.com/blog/mongoose-subdocuments/
+            normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css -->
+            <div class="code-toolbar">
+                <pre class="language-html">
+                    <code class="language-html">
+                        &lt;<span class="token property">link</span> <span class="token namespace">rel</span>=<span class="token string">"stylesheet"</span> <span class="token namespace">type</span>=<span class="token string">"text/css</span> <span class="token namespace">href</span>=<span class="token string">"css/styles.css"</span>&gt;
+                        &lt;<span class="token property">script</span> <span class="token namespace">src</span>=<span class="token string">"https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"</span>&gt;&lt;<span class="token property">/script</span>&gt;
+                        &lt;<span class="token property">script</span> <span class="token namespace">type</span>=<span class="token string">"text/javascript</span> <span class="token namespace">src</span>=<span class="token string">"js/constants.js</span>&gt;&lt;<span class="token property">/script</span>&gt;
+                        &lt;<span class="token property">script</span> <span class="token namespace">defer</span> <span class="token namespace">type</span>=<span class="token string">"text/javascript"</span> <span class="token namespace">href</span>=<span class="token string">"js/chewy.js"</span>&gt;&lt;<span class="token property">/script</span>&gt;
+                    </code>
+                </pre>
+            </div>
+            <p>
+                The first three files are Chewy.js dependencies. <br>
+                The first file is the style sheet for the expandable pop-up assistant that your users can interact with. <br>
+                The second file is jQuery.js library that Chewy.js uses to fetch imgs on the present website. <br>
+                The third file are the hardcoded keyboard buttons (known as keycodes) and their numerical value mappings. For example the keyboard button "A" has the value 65.<br>
+                The fourth and final file is the Chewy.js library itself.
+            </p>
+
+            <h3>How to use (as a Developer)</h3>
+            <p>Insert the following Javascript code into your highest level .js file (could be titled index.js or App.js)</p>
+            <!-- https://zellwk.com/blog/mongoose-subdocuments/
+            normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css -->
+            <div class="code-toolbar">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <span class="token keyword">const</span> chewy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Chewy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Create an instance of Chewy.js</span>
+                    </code>
+                </pre>
+            </div>
+            <p>You will notice the Chewy.js assistant appearing on the bottom right of your web page. &#8600; <br>
+            If you expand the assistant by clicking on it, you will find a list of all the available Chewy.js commands your users can interact with. <br>
+            You may have noticed, there are no commands! Lets make use of the Chewy.js API to add some commands. <br>
+            Below are the three available functions you can utilize to modify Chewy.js to your liking.</p>
+            <!-- https://zellwk.com/blog/mongoose-subdocuments/
+            normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css -->
+            <div class="code-toolbar">
+                <pre class="language-js">
+                    <code class="language-js">
+                        chewy.<span class="token function">createFormat</span>(<span class="token string">`K`</span>, <span class="token string">`3 x 3 grid`</span>) <span class="token comment">// Add a viewing format your users would appreciate</span>
+                        chewy.<span class="token function">updateFormat</span>(<span class="token string">`K`</span>, <span class="token string">`fullscreen column`</span>) <span class="token comment">// Modify existing formats based on user feedback</span>
+                        chewy.<span class="token function">deleteFormat</span>(<span class="token string">`K`</span>) <span class="token comment">// Remove existing formats</span>
+                    </code>
+                </pre>
+            </div>
+            <p>Pretty intuitive right?<br>
+            <span class="token function">createFormat</span> lets you create a viewing format and map it to a keyboard button.<br>
+            <span class="token function">updateFormat</span> lets you modifying existing viewing formats by specifiying a keyboard button and a new viewing format.<br>
+            <span class="token function">deleteFormat</span> lets you delete existing viewing formats by specifying the keyboard button you want to free up.<br>
+            Below is a list of all the available formats you can create (Planning to add more in the future).
+            </p>
+
+            <table class="formats-table">
+                <th>Viewing Format</th>
+                <th>Description</th>
+                <tr>
+                    <td align="center" valign="center">
+                    <strong>a</strong> x <strong>b</strong> grid
+                    </td>
+                    <td>
+                    Formats the images on the page into a <strong>a</strong> by <strong>b</strong> grid. This will change an image's aspect ratio, potentially ruining the image quality. This viewing format will only display the first <strong>a</strong> times <strong>b</strong> images on the current web page, meaning any more images will be hidden. <br>
+                    Look into "column" to avoid this
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="center">
+                    [fullscreen] [<strong>a</strong>] column
+                    </td>
+                    <td>
+                    Formats the images on the page into <strong>a</strong> column(s). The 'fullscreen' and '<strong>a</strong>' parameters are both optional.<br>
+                    If you do not specify an <strong>a</strong> value, Chewy will default to display all images in a single column. <br>
+                    If you do specify an <strong>a</strong> value, Chewy will divide the page into <strong>a</strong> columns and change the images to fit the maximum boundaries of the column. This will change an image's aspect ratio, potentially ruining the image quality. <br>
+                    If you do not add the 'fullscreen' parameter, Chewy will display the images the way they are presented on the website, in a single column without changing any of their aspect ratios. <br>
+                    If you do specify the 'fullscreen' parameter, Chewy will display a single image stretched to the height and width of the user's screen and all other images will display underneath it, in column fashion.
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="center">
+                    [fullscreen] [<strong>a</strong>] row
+                    </td>
+                    <td>
+                    Formats the images on the page into <strong>a</strong> row(s). The 'fullscreen' and '<strong>a</strong>' parameters are both optional.<br> 
+                    If you do not specify an <strong>a</strong> value, Chewy will default to display all images in a single row. <br>
+                    If you do specify an <strong>a</strong> value, Chewy will divide the page into <strong>a</strong> rows and change the images to fit the maximum boundaries of the row. This will change an image's aspect ratio, potentially ruining the image quality. <br>
+                    If you do not add the 'fullscreen' parameter, Chewy will display the images the way they are presented on the website, in a single row without changing any of their aspect ratios. <br>
+                    If you do specify the 'fullscreen' parameter, Chewy will display a single image stretched to the height and width of the user's screen and all other images will display to the right of it, in row fashion.
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="center">
+                    [fullscreen] [<strong>a</strong>] slideshow
+                    </td>
+                    <td>
+                    Formats the images on the page into a slideshow, where each image is displayed for <strong>a</strong> seconds. The 'fullscreen' and '<strong>a</strong>' parameters are both optional.<br>
+                    If you do not specify an <strong>a</strong> value, Chewy will default to display all images, each 3 seconds at a time. <br>
+                    If you do specify an <strong>a</strong> value, Chewy will divide the page into <strong>a</strong> columns and change the images to fit the maximum boundaries of the column. This will change an image's aspect ratio, potentially ruining the image quality. <br>
+                    If you do not add the 'fullscreen' parameter, Chewy will display the images the way they are presented on the website, in a single row without changing any of their aspect ratios. <br>
+                    If you do specify the 'fullscreen' parameter, Chewy will display a single image stretched to the height and width of the user's screen and all other images will display after it, in slideshow fashion.
+                    </td>
+                </tr>
+            </table>
+
+            <h3>How to use (as a User)</h3>
+            <p>Similar to a developer, a user may notice the Chewy assistant on the bottom right &#8600; and click on it to learn more. <br>
+            As easy it was for the developer to install and setup Chewy, a user simply presses a keyboard button and the page will automatically transform to one of your viewing formats. <br>
+            You may think, thats awesome! But how can a user revert the web page to its original state or potentially a different viewing format? Have no fear, Chewy is here! <br>
+            The Chewy assistant will automatically transform asynchronously, informing the user how to revert back to the original web page. After doing so, Chewy will also transform into its original state, ready to assist your users. <a href="/examples.html">Try it yourself here!</a><br>
+            While unavoidable, a new user to your website will likely interact with Chewy on accident, but a good developer will map viewing formats to unused keyboard buttons to reduce this. <br>
+            For example, if your website has users often entering their cell-phone information, a good idea would be to avoid mapping a viewing format to any of the numeric keyboard buttons (1, 2, 3, 4, 5, 6, 7, 8, 9, 0).<br>
+            Once a user becomes aware of Chewy and its minimal learning curve, your users will be on their way to browse your website with their own choice of viewship that you provided them.
+            </p>
+
+            <h3>Yes. It is really that simple.</h3>
+        </div>
+    </div>
+    <footer class="footer">Copyright © 2020 Kenneth Chyzewski. <br> All rights reserved.</footer>
+ </body>
+</html>

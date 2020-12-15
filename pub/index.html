@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Chewy</title>
+
+    <!------- Loading JS scripts ------->
+    <!-- When loading JS scripts, considerations should be made regarding when
+        the DOM is being loaded, and when different scripts 
+        depend on each other. Below are a few ways to load the scripts.
+    -->
+
+    <!-- Load any CSS before the JS in case you need to access styles in your scripts. -->
+    <link rel="stylesheet" type="text/css" href="css/websitestyles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+   	<!-- If you don't use either 'async' or 'defer', the HTML parsing/DOM loading is blocked until the script is downloaded and executed. -->
+    <!-- Since it is the top script on the page, it will block 
+      before loading everything under it (including the <body>).  -->
+    <!-- <script src="dom_load.js"></script> -->
+
+    <!-- 'defer' states that the script should be executed after the HTML is parsed.
+        If multiple scripts have 'defer', they are loaded one after the other.  
+        This will guarantee execution order, and ensure that scripts that depend on each other load
+        in an order that will not cause errors. -->
+    <!-- First we load jquery from a Google CDN. -->
+    <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- Then we load a script that depends on jQuery -->
+    <!-- <script defer type="text/javascript" src='js_libraries.js'></script> -->
+    <!-- Then we load a script that depends on our libraries (and jQuery) -->
+    <!-- <script defer type="text/javascript" src='examples.js'></script> -->
+
+    <!-- 
+    - 'async' states that it is safe to download the script without blocking 
+    HTML parsing, and execute  once downloaded (DOM loading, if not completed, pauses during script execution).
+    This allows for quicker loading of the DOM content while waiting for scripts to download.
+    Note that if multiple scripts are 'async', their order
+    of loading is *not* guaratneed, and async scripts may also be executed after 
+    the 'DOMContentLoaded' event is fired (we make up for this in the dom_load_async.js file).
+    * General rule: don't use async on scripts that depend on each other. *
+     Often scripts like ads and analytics are loaded async since they don't depend
+     on other scipts.
+    -->
+    <!-- Jquery used for slideshow of images-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script defer type="text/javascript" src="js/chewy.js"></script>
+    <script defer type="text/javascript" src="js/examples.js"></script>
+
+</head>
+<body>
+    <div class="landing-background">
+        <!-- https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black -->
+        <ul>
+            <li><a class="active" href="/index.html">Home</a></li>
+            <li><a href="/examples.html">Examples</a></li>
+            <li><a href="/documentation.html">Documentation</a></li>
+            <li><a href="https://github.com/csc309-fall-2020/js-library-chyzewsk" target="_blank">Github</a></li>
+        </ul>
+        <div class="landing-title">
+            <h1>CHEWY.js</h1>
+            <h2>Plug and Play image formatter and viewer.</h2>
+        </div>
+
+        <!-- https://freefrontend.com/css-buttons/
+        https://codepen.io/ahmadbassamemran/pen/PMqayW -->
+        <div class="wrapper">
+            <button onclick="location.href = '/examples.html';" class="homebutton">
+                Examples 
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <button onclick="location.href = '/documentation.html';" class="homebutton">
+                Documentation
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+    <div class="landing-footer">
+        <p>Copyright © 2020 Kenneth Chyzewski. <br> All rights reserved.</p>
+    </div>
+</body>
+</html>
